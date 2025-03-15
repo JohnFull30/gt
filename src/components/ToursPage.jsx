@@ -1,0 +1,65 @@
+// src/components/ToursPage.jsx
+import React from 'react';
+import { Container, Grid2, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+
+const toursData = [
+  {
+    title: "Port of Spain & Fort George Sightseeing",
+    description: "Explore Port of Spain with panoramic views from historic Fort George.",
+    image: "public/assets/tour-placeholder.png", // placeholder path
+    price: "US$52"
+  },
+  {
+    title: "Gasparee Caves & Islands Cruise Combo",
+    description: "Discover stunning caves and cruise around breathtaking islands.",
+    image: "public/assets/tour-placeholder.png", // placeholder path
+    price: "US$75"
+  },
+  {
+    title: "Protected Tour re VL",
+    description: "Additional payment details available upon booking.",
+    image: "public/assets/tour-placeholder.png", // placeholder path
+    price: "US$48"
+  }
+];
+
+export default function ToursPage() {
+      console.log("ToursPage Component Rendered"); // Debugging step
+
+  return (
+    <Container sx={{ py: 5 }}>
+      <Typography variant="h4" gutterBottom>
+        Tours and Experiences
+      </Typography>
+      <Grid2 container spacing={4}>
+        {toursData.map((tour, index) => (
+          <Grid2 item key={index} xs={12} sm={6} md={4}>
+            <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
+              <CardMedia
+                component="img"
+                height="200"
+                image={tour.image}
+                alt={tour.title}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="div">
+                  {tour.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {tour.description}
+                </Typography>
+                <Typography variant="subtitle1" color="primary" sx={{ mt: 1 }}>
+                  From {tour.price}
+                </Typography>
+                <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+                  Book Now
+                </Button>
+                </CardContent>
+              </Card>
+            </Grid2>
+        ))}
+      </Grid2>
+    </Container>
+  );
+};
+
