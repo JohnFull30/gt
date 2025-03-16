@@ -4,10 +4,17 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ background: "#fff", color: "#000", boxShadow: "none" }}>
+    <AppBar position="static" sx={{ background: "#fff", color: "secondary.main", boxShadow: "none" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* Logo */}
-        <Typography variant="h6" component={Link} to="/home" sx={{ fontWeight: "bold" }}>GoTobago</Typography>
+        <Typography
+          variant="h6"
+          component={Link}
+          to="/home"
+          sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#secondary.main" }, textDecoration: 'none', color: 'primary.main' }}
+        >
+          GoTobago
+        </Typography>
 
         {/* Centered Navigation Links */}
         <Box sx={{ display: "flex", gap: 4 }}>
@@ -15,7 +22,7 @@ const Navbar = () => {
             variant="subtitle1"
             component={Link}
             to="/rentals"
-            sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#5E17EB" }, textDecoration: 'none', color: 'inherit' }}
+            sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "primary.main" }, textDecoration: 'none', color: 'inherit' }}
           >
             RENTALS
           </Typography>
@@ -23,7 +30,7 @@ const Navbar = () => {
             variant="subtitle1"
             component={Link}
             to="/tours"
-            sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#5E17EB" }, textDecoration: 'none', color: 'inherit' }}
+            sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "primary.main" }, textDecoration: 'none', color: 'inherit' }}
           >
             TOURS
           </Typography>

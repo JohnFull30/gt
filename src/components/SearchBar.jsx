@@ -72,12 +72,12 @@ const SearchBar = () => {
         {/* Search Button */}
         <IconButton
           sx={{
-            backgroundColor: "#5E17EB",
+            backgroundColor: "secondary.main",
             color: "white",
             borderRadius: "50%",
             width: 40,
             height: 40,
-            "&:hover": { backgroundColor: "#4B13C5" },
+            "&:hover": { backgroundColor: "primary.main" },
           }}
         >
           <SearchIcon />
