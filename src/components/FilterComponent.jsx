@@ -30,13 +30,15 @@ const FilterComponent = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        width: "90%",
+        flexWrap: "wrap",
+        width: "100%",
+        maxWidth: 1200,
         borderRadius: "30px",
         bgcolor: "#fff",
         boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
-        p: "10px 20px",
-        gap: 3,
-        overflowX: "auto",
+        p: { xs: 2, sm: 3 },
+        gap: 2,
+        flexDirection: { xs: "column", md: "row" }, // Stacks on mobile, horizontal on desktop
       }}
     >
       {/* Price Slider Section */}
@@ -48,13 +50,28 @@ const FilterComponent = () => {
           valueLabelDisplay="auto"
           min={0}
           max={500}
+          sx={{
+            color: "primary.main",
+          }}
         />
       </Box>
 
-      <Divider orientation="vertical" flexItem sx={{ mx: 1 }} />
+      <Divider
+        orientation="vertical"
+        flexItem
+        sx={{ mx: 1, display: { xs: "none", md: "block" } }}
+      />
 
-      {/* Checkboxes */}
-      <Box sx={{ display: "flex", gap: 1, px: 2, flexWrap: "nowrap" }}>
+      {/* Checkboxes Section - Stays BEFORE the button on desktop */}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: { xs: 1, sm: 2 },
+          justifyContent: { xs: "center", md: "flex-start" },
+          order: { xs: 2, md: 2 }, // Checkboxes stay in the middle on desktop
+        }}
+      >
         <FormControlLabel
           control={
             <Checkbox
@@ -87,20 +104,33 @@ const FilterComponent = () => {
         />
       </Box>
 
-      <Divider orientation="vertical" flexItem sx={{ mx: 2, display: { xs: "none", md: "block" } }} />
+      <Divider
+        orientation="vertical"
+        flexItem
+        sx={{ mx: 2, display: { xs: "none", md: "block" } }}
+      />
 
-      <Button
-        variant="contained"
-        color="primary"
+      {/* Apply Filters Button - Moves AFTER checkboxes on desktop */}
+      <Box
         sx={{
-          px: 4,
-          py: 1,
-          borderRadius: "20px",
-          whiteSpace: "nowrap",
+          order: { xs: 3, md: 3 }, // On mobile, it comes last; on desktop, it's after checkboxes
+          textAlign: "center",
         }}
       >
-        Apply Filters
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{
+            px: { xs: 3, sm: 4 },
+            py: 1,
+            borderRadius: "20px",
+            whiteSpace: "nowrap",
+            width: { xs: "100%", sm: "auto" },
+          }}
+        >
+          Apply Filters
+        </Button>
+      </Box>
     </Box>
   );
 };
