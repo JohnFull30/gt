@@ -32,7 +32,7 @@ const FilterComponent = () => {
         alignItems: "center",
         justifyContent: { xs: "center", md: "space-between" }, // Centered on mobile, spaced out on desktop
         width: "100%",
-        maxWidth: 1200,
+        maxWidth: { xs: "100%", sm: "90%", md: "80%" }, // Ensures consistency
         borderRadius: "30px",
         bgcolor: "#fff",
         boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
