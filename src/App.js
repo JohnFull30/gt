@@ -8,6 +8,7 @@ import HeroSection from './components/HeroSection';
 import theme from './theme';
 import FilterComponent from './components/FilterComponent';
 import Box from '@mui/material/Box';
+import Rentals from './pages/Rentals';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
     <Box sx={{ p: 3 }}>
       <SearchBar />
       <FilterComponent />
+      <Rentals />
     </Box>
   }
 />
