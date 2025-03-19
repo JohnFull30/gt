@@ -11,7 +11,7 @@ const toursData = [
   },
   {
     title: "Gasparee Caves & Islands Cruise Combo",
-    description: "Discover stunning caves and cruise around breathtaking islands. Hi mom!",
+    description: "Discover stunning caves and cruise around breathtaking islands. Hi mom!!",
     image: "/assets/tour-placeholder.png", // placeholder path
     price: "US$75"
   },
