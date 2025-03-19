@@ -1,12 +1,12 @@
 // src/components/ToursPage.jsx
 import React from 'react';
-import { Container, Grid, Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
+import { Container, Grid2, Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
 
 const toursData = [
   {
     title: "Port of Spain & Fort George Sightseeing",
     description: "Explore Port of Spain with panoramic views from historic Fort George.",
-    image: "/assets/tour-placeholder.png", // placeholder path
+    image: "../assets/tour-placeholder.png", // placeholder path
     price: "US$52"
   },
   {
@@ -32,9 +32,9 @@ export default function ToursPage() {
         <Typography variant="h4" gutterBottom>
           Tours and Experiences
         </Typography>
-        <Grid container spacing={4} justifyContent="center">
+        <Grid2 container spacing={4} justifyContent="center">
           {toursData.map((tour, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4}>
+            <Grid2 item key={index} xs={12} sm={6} md={4}>
               <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
                 <CardMedia
                   component="img"
@@ -57,9 +57,9 @@ export default function ToursPage() {
                   </Button>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
       </Box>
     </Container>
   );
