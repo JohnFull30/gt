@@ -19,7 +19,7 @@ const carsData = [
     name: "Tesla Model 3",
     description: "Eco-friendly and fast electric car.",
     image: `${process.env.PUBLIC_URL}/assets/tesla-model3.png`, 
-    price: "120"
+    price: "200"
   }
 ];
 
