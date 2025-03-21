@@ -6,19 +6,19 @@ const toursData = [
   {
     title: "Port of Spain & Fort George Sightseeing",
     description: "Explore Port of Spain with panoramic views from historic Fort George.",
-    image: "../assets/tour-placeholder.png", // placeholder path
+    image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
     price: "US$52"
   },
   {
     title: "Gasparee Caves & Islands Cruise Combo",
     description: "Discover stunning caves and cruise around breathtaking islands. Hi mom!!",
-    image: "/assets/tour-placeholder.png", // placeholder path
+    image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
     price: "US$75"
   },
   {
     title: "Protected Tour re VL",
     description: "Additional payment details available upon booking.",
-    image: "/assets/tour-placeholder.png", // placeholder path
+    image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
     price: "US$48"
   }
 ];
