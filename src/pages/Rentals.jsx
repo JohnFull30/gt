@@ -6,19 +6,19 @@ const carsData = [
   {
     name: "Toyota Corolla",
     description: "Comfortable and fuel-efficient sedan.",
-    image: "/assets/toyota-corolla.jpg", // Replace with actual image
+    image: `${process.env.PUBLIC_URL}/assets/toyota-corolla.png`, 
     price: "45"
   },
   {
     name: "Jeep Wrangler",
     description: "Perfect for off-road adventures!",
-    image: "/assets/jeep-wrangler.jpg",
+    image: `${process.env.PUBLIC_URL}/assets/jeep-wrangler.png`, 
     price: "85"
   },
   {
     name: "Tesla Model 3",
     description: "Eco-friendly and fast electric car.",
-    image: "/assets/tesla-model3.jpg",
+    image: `${process.env.PUBLIC_URL}/assets/tesla-model3.png`, 
     price: "120"
   }
 ];
