@@ -7,7 +7,7 @@ const carsData = [
     name: "Toyota Corolla",
     description: "Comfortable and fuel-efficient sedan.",
     image: `${process.env.PUBLIC_URL}/assets/toyota-corolla.png`, 
-    price: "45"
+    price: "50"
   },
   {
     name: "Jeep Wrangler",
