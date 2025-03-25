@@ -13,7 +13,7 @@ const carsData = [
     name: "Jeep Wrangler",
     description: "Perfect for off-road adventures!",
     image: `${process.env.PUBLIC_URL}/assets/jeep-wrangler.png`, 
-    price: "85"
+    price: "90"
   },
   {
     name: "Tesla Model 3",
