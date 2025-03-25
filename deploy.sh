@@ -4,20 +4,18 @@
 echo "Enter your commit message:"
 read commit_message
 
-# Deploy with message
-git checkout master
+# Stage, commit, and push to main
+git checkout main
 git add .
 git commit -m "$commit_message"
-git push origin master
-
-git checkout main
-git merge master
 git push origin main
 
-git checkout gh-pages
-git merge main
-git push origin gh-pages
+# Deploy using npm script (pushes to gh-pages automatically)
 npm run deploy
 
+# Return to main
+git checkout main
+
+echo "✅ Deployed to gh-pages using npm run deploy!"
 
 
