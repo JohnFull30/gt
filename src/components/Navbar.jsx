@@ -10,7 +10,7 @@ const Navbar = () => {
         <Typography
           variant="h6"
           component={Link}
-          to="/home"
+          to="/"
           sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#secondary.main" }, textDecoration: 'none', color: 'primary.main' }}
         >
           GoTobago

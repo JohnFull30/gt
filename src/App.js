@@ -14,23 +14,31 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Navbar />
-        <Routes>
-        <Route
-  path="/rentals"
-  element={
-    <Box sx={{ p: 3 }}>
-      <SearchBar />
-      <FilterComponent />
-      <Rentals />
-    </Box>
-  }
-/>
-          <Route path="/tours" element={<ToursPage />} />
-          <Route path="/home" element={<HeroSection />} />
+  <Navbar />
+  <Routes>
+    <Route 
+      path="/gt" 
+      element={<HeroSection />}  // 👈 HeroSection as landing page
+    />
 
-        </Routes>
-          </Router>
+    <Route 
+      path="/rentals"
+      element={
+        <Box sx={{ p: 3 }}>
+          <SearchBar />
+          <FilterComponent />
+          <Rentals />
+        </Box>
+      } 
+    />
+
+    <Route 
+      path="/tours" 
+      element={<ToursPage />} 
+    />
+  </Routes>
+</Router>
+
         </ThemeProvider>
       );
     }
