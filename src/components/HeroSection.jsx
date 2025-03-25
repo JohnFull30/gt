@@ -1,12 +1,43 @@
 import React from 'react';
-import { Button, Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 
 const HeroSection = () => {
   return (
-    <Box sx={{ textAlign: 'center', padding: '50px' }}>
-      <Typography variant="h2" sx={{ marginBottom: '20px' }}>Welcome to GoTobago</Typography>
-      <Button variant="contained" color="primary" sx={{ color: 'secondary.main' }}>
-        Search
+    <Box
+      sx={{
+        width: '100%',
+        height: '100vh',
+        backgroundImage: `
+          linear-gradient(
+            rgba(0, 0, 0, 0.2), 
+            rgba(0, 0, 0, 0.2)
+          ), 
+          url(${process.env.PUBLIC_URL}/assets/hero-background.jpg)
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: '#fff',
+        textAlign: 'center',
+        px: 2,
+      }}
+    >
+      <Typography variant="h2" sx={{ fontWeight: 'bold', mb: 3 }}>
+        An Amazing Place
+      </Typography>
+      <Typography variant="subtitle1" sx={{ mb: 4, maxWidth: 600 }}>
+        Discover Tobago’s top car rentals and unforgettable tours all in one spot.
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ px: 4, py: 1.5, borderRadius: '30px', fontWeight: 'bold' }}
+      >
+        Start Exploring
       </Button>
     </Box>
   );
