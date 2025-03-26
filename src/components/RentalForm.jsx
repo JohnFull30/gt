@@ -48,7 +48,7 @@ export default function RentalForm() {
         Message: ${formData.message || 'No message provided.'}
       `);
   
-      window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:johnathanfuller0@gmail.com?subject=${subject}&body=${body}`;
     }
     
       // TODO: Integrate with your email sending service/API here
