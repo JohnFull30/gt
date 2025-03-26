@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const CarCard = ({ image, name, price, description }) => {
   return (
@@ -15,7 +16,7 @@ const CarCard = ({ image, name, price, description }) => {
         <Typography variant="subtitle1" color="primary" sx={{ mt: 1 }}>
           From ${price}/day
         </Typography>
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ mt: 2 }}>
           Rent Now
         </Button>
       </CardContent>

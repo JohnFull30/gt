@@ -1,6 +1,7 @@
 // src/components/ToursPage.jsx
 import React from 'react';
 import { Container, Grid2, Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const toursData = [
   {
@@ -52,7 +53,7 @@ export default function ToursPage() {
                   <Typography variant="subtitle1" color="primary" sx={{ mt: 1 }}>
                     From {tour.price}
                   </Typography>
-                  <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+                  <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ mt: 2 }}>
                     Book Now
                   </Button>
                 </CardContent>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -35,6 +36,8 @@ const HeroSection = () => {
       <Button
         variant="contained"
         color="primary"
+        component={Link}
+        to="/tours"
         sx={{ px: 4, py: 1.5, borderRadius: '30px', fontWeight: 'bold' }}
       >
         Start Exploring
