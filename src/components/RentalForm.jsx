@@ -6,6 +6,7 @@ export default function RentalForm() {
     name: '',
     phone: '',
     email: '',
+    message: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -37,11 +38,21 @@ export default function RentalForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (validate()) {
-      alert('Form submitted successfully!');
-      console.log(formData);
+      const subject = encodeURIComponent("New Rental Request");
+      const body = encodeURIComponent(`
+        Name: ${formData.name}
+        Phone: ${formData.phone}
+        Email: ${formData.email}
+        Message: ${formData.message || 'No message provided.'}
+      `);
+  
+      window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
     }
+    
+      // TODO: Integrate with your email sending service/API here
+    
   };
 
   return (
@@ -80,6 +91,17 @@ export default function RentalForm() {
         onChange={handleChange}
         error={Boolean(errors.email)}
         helperText={errors.email}
+        margin="normal"
+      />
+
+      <TextField
+        fullWidth
+        label="Message (Optional)"
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        multiline
+        rows={4}
         margin="normal"
       />
 
