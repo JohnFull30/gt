@@ -36,24 +36,28 @@ export default function RentalForm() {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (validate()) {
-      const subject = encodeURIComponent("New Rental Request");
-      const body = encodeURIComponent(`
-        Name: ${formData.name}
-        Phone: ${formData.phone}
-        Email: ${formData.email}
-        Message: ${formData.message || 'No message provided.'}
-      `);
+      try {
+        const response = await fetch('http://localhost:5000/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
   
-      window.location.href = `mailto:johnathanfuller0@gmail.com?subject=${subject}&body=${body}`;
+        if (response.ok) {
+          alert('Email sent successfully!');
+        } else {
+          alert('Failed to send email. Please try again later.');
+        }
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred while sending email.');
+      }
     }
-    
-      // TODO: Integrate with your email sending service/API here
-    
-  };
+  };  
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, mx: 'auto', p: 2 }}>
