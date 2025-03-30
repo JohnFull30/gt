@@ -41,7 +41,7 @@ export default function RentalForm() {
   
     if (validate()) {
       try {
-        const response = await fetch('http://localhost:5000/send-email', {
+        const response = await fetch('http://localhost:4000/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
@@ -57,7 +57,9 @@ export default function RentalForm() {
         alert('An error occurred while sending email.');
       }
     }
-  };  
+  };
+
+
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, mx: 'auto', p: 2 }}>
