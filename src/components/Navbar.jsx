@@ -13,7 +13,7 @@ const Navbar = () => {
           to="/gt"
           sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#secondary.main" }, textDecoration: 'none', color: 'primary.main' }}
         >
-          GoTobago
+          GoTobago2
         </Typography>
 
         {/* Centered Navigation Links */}
