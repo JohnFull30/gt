@@ -4,7 +4,17 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ background: "#fff", color: "secondary.main", boxShadow: "none" }}>
+<AppBar
+  position="absolute"
+  elevation={0}
+  sx={{
+    background: "rgba(0, 0, 0, 0.3)", // transparent black overlay
+    color: "#fff",                   // white text for contrast
+    boxShadow: "none",
+    backdropFilter: "blur(10px)",    // subtle blur effect
+  }}
+>
+
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* Logo */}
         <Typography

@@ -10,33 +10,47 @@ import FilterComponent from './components/FilterComponent';
 import Box from '@mui/material/Box';
 import Rentals from './pages/Rentals';
 import RentalForm from './components/RentalForm';
+import CssBaseline from '@mui/material/CssBaseline';
+
+
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-  <Navbar />
-  <Routes>
-    <Route 
-      path="/gt" 
-      element={<HeroSection />}  // 👈 HeroSection as landing page
-    />
-    <Route 
-      path="/rentals"
-      element={<Box sx={{ p: 3 }}><SearchBar /><FilterComponent /><Rentals /></Box>} 
-    />
-    <Route 
-      path="/tours" 
-      element={<ToursPage />} 
-    />
-    <Route 
-      path="/rentalForm" 
-      element={<RentalForm />} 
-    />
-  </Routes>
-</Router>
+<ThemeProvider theme={theme}>
+  <CssBaseline />
+  <Router>
+    <Navbar />
+    <Routes>
+  <Route
+    path="/rentals"
+    element={
+      <Box sx={{ pt: 10, px: 3 }}>
+        <SearchBar />
+        <FilterComponent />
+        <Rentals />
+      </Box>
+    }
+  />
+  <Route
+    path="/tours"
+    element={
+      <Box sx={{ pt: 10 }}>
+        <ToursPage />
+      </Box>
+    }
+  />
+  <Route
+    path="/gt"
+    element={
+      <Box>
+        <HeroSection />
+      </Box>
+    }
+  />
+</Routes>
 
-        </ThemeProvider>
+  </Router>
+</ThemeProvider>
       );
     }
 

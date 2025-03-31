@@ -2,12 +2,14 @@ import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { Link } from "react-router-dom";
 
+
 const HeroSection = () => {
   return (
     <Box
       sx={{
         width: '100%',
         height: '100vh',
+        paddingTop: '64px', // <-- this is key to prevent the content from being hidden behind the navbarss
         backgroundImage: `
           linear-gradient(
             rgba(0, 0, 0, 0.2), 
