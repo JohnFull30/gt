@@ -4,8 +4,11 @@
 echo "Enter your commit message:"
 read commit_message
 
-# Stage, commit, and push to main
+# Pull latest from remote (to stay up to date)
 git checkout main
+git pull --rebase origin main
+
+# Stage, commit, and push to main
 git add .
 git commit -m "$commit_message"
 git push origin main
@@ -17,5 +20,3 @@ npm run deploy
 git checkout main
 
 echo "✅ Deployed to gh-pages using npm run deploy!"
-
-
