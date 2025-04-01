@@ -30,7 +30,7 @@ const HeroSection = () => {
       }}
     >
       <Typography variant="h2" sx={{ fontWeight: 'bold', mb: 3 }}>
-        An Amazing Place
+        An Amazing Place2
       </Typography>
       <Typography variant="subtitle1" sx={{ mb: 4, maxWidth: 600 }}>
         Discover Tobago’s top car rentals and unforgettable tours all in one spot.
