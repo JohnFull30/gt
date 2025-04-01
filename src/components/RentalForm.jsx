@@ -62,10 +62,35 @@ export default function RentalForm() {
 
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, mx: 'auto', p: 2 }}>
+    <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "calc(100vh - 64px)", // minus navbar height
+      px: { xs: 2, sm: 4 },
+      py: { xs: 6, md: 8 },
+      backgroundColor: "#f9f9f9",
+    }}
+  >
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        width: "100%",
+        maxWidth: 500,
+        bgcolor: "#fff",
+        p: { xs: 3, sm: 4 },
+        borderRadius: 3,
+        boxShadow: 3,
+      }}
+    >
       <Typography variant="h5" gutterBottom>
         Customer Rental Information
       </Typography>
+      {/* ...form fields remain the same... */}
+
+  
 
       <TextField
         fullWidth
@@ -114,6 +139,7 @@ export default function RentalForm() {
       <Button variant="contained" color="primary" type="submit" sx={{ mt: 2 }}>
         Submit
       </Button>
+    </Box>
     </Box>
   );
 }

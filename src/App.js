@@ -47,6 +47,14 @@ function App() {
       </Box>
     }
   />
+    <Route
+    path="/rentalForm"
+    element={
+      <Box>
+        <RentalForm sx={{ pt: 10 }}/>
+      </Box>
+    }
+  />
 </Routes>
 
   </Router>
