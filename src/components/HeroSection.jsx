@@ -33,7 +33,7 @@ const HeroSection = () => {
         An Amazing Place
       </Typography>
       <Typography variant="subtitle1" sx={{ mb: 4, maxWidth: 600 }}>
-        Discover Tobago’s top car rentals and unforgettable tours all in one spot.
+        Discover Tobago’s top car rentals and unforgettable tours all in 1 spot.
       </Typography>
       <Button
         variant="contained"
