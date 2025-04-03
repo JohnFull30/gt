@@ -44,6 +44,15 @@ const Navbar = () => {
           >
             TOURS
           </Typography>
+          <Typography
+            variant="subtitle1"
+            component={Link}
+            to="/about"
+            sx={{  fontWeight: "bold", cursor: "pointer", "&:hover": { color: "primary.main" }, textDecoration: 'none', color: 'inherit' }}
+>
+            ABOUT
+          </Typography>
+
         </Box>
 
         {/* Menu Icon */}

@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Rentals from './pages/Rentals';
 import RentalForm from './components/RentalForm';
 import CssBaseline from '@mui/material/CssBaseline';
+import About from './pages/About'; // at the top
+
 
 
 
@@ -39,6 +41,13 @@ function App() {
       </Box>
     }
   />
+  <Route 
+    path="/about" 
+    element={
+    <About />
+    } 
+    />
+
   <Route
     path="/gt"
     element={
