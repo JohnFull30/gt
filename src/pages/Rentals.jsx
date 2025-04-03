@@ -25,7 +25,7 @@ const carsData = [
 
 export default function RentalsPage() {
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative' } }>
       <Container sx={{ py: 5 }}>
         <Grid2 container spacing={4} justifyContent="center">
           {carsData.map((car, index) => (

@@ -3,11 +3,12 @@ import { Box, Container, Typography, Divider } from '@mui/material';
 
 export default function About() {
   return (
-    <Box sx={{ py: 5, backgroundColor: '#f5f5f5' }}>
+    <Box sx={{ py: 5, backgroundColor: '#f5f5f5', paddingTop: '64px', // <-- this is key to prevent the content from being hidden behind the navbarss
+    }}>
       <Container maxWidth="md">
         <Box
           component="img"
-          src={`${process.env.PUBLIC_URL}/assets/hero-placeholder.png`}
+          src={`${process.env.PUBLIC_URL}/assets/aboutus-img.jpeg`}
           alt="Island View"
           sx={{ width: '100%', borderRadius: 4, mb: 4 }}
         />
