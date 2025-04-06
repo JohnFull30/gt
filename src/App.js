@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ToursPage from './components/ToursPage';
+import TourDetails from './pages/TourDetails';
 import SearchBar from './components/SearchBar';
 import HeroSection from './components/HeroSection';
 import theme from './theme';
@@ -38,6 +39,14 @@ function App() {
     element={
       <Box sx={{ pt: 10 }}>
         <ToursPage />
+      </Box>
+    }
+  />
+  <Route
+    path="/tours/:id"
+    element={
+      <Box sx={{ pt: 10 }}>
+        <TourDetails />
       </Box>
     }
   />

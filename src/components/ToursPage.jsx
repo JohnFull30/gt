@@ -5,18 +5,21 @@ import { Link } from "react-router-dom";
 
 const toursData = [
   {
-    title: "Port of Spain & Fort George Sightseeing",
-    description: "Explore Port of Spain with panoramic views from historic Fort George.",
+    id: 'essence',
+    title: "Essence of Tobago",
+    description: "Experience Tobago like never before on a breathtaking driving tour with curated stops at the island’s most iconic gems",
     image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
-    price: "US$52"
+    price: "US$90"
   },
   {
-    title: "Gasparee Caves & Islands Cruise Combo",
+    id: "real",
+    title: "Get Real with Tobago",
     description: "Discover stunning caves and cruise around breathtaking islands. Hi mom!!",
     image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
     price: "US$75"
   },
   {
+    id: "essence",
     title: "Protected Tour re VL",
     description: "Additional payment details available upon booking.",
     image: `${process.env.PUBLIC_URL}/assets/tour-placeholder.png`, // placeholder path
@@ -47,13 +50,16 @@ export default function ToursPage() {
                   <Typography gutterBottom variant="h6" component="div">
                     {tour.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" sx={{ textAlign: "left" }}>
                     {tour.description}
                   </Typography>
-                  <Typography variant="subtitle1" color="primary" sx={{ mt: 1 }}>
-                    From {tour.price}
+                  <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                    {tour.price}
                   </Typography>
-                  <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ mt: 2 }}>
+                  <Button variant="contained" component={Link} to={`/tours/${tour.id}`} color="secondary" sx={{ m: 2 }}>
+                    View Details
+                  </Button>
+                  <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ m: 2 }}>
                     Book Now
                   </Button>
                 </CardContent>
