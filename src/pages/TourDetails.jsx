@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Typography, Box, Divider, Button, Link } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Container, Typography, Box, Divider, Button } from '@mui/material';
+import { useParams, Link } from 'react-router-dom';
 
 // TODO: Ask Curvin about adding stings ray viewing, and/or switching one thing for it. Would that cost more becuase it's further
 // TODO: also ask general opinion about this. Does he know of better waterfalls
