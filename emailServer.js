@@ -1,13 +1,13 @@
+require('dotenv').config();               // 1️⃣ Load .env first
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'); // 2️⃣ Require Nodemailer
+
 
 const app = express();
 app.use(express.json());
-
-// Temporarily unrestricted CORS to debug
 app.use(cors());
-app.options('*', cors());
+
 
 // Nodemailer setup (ensure correct credentials!)
 let transporter = nodemailer.createTransport({
@@ -17,6 +17,28 @@ let transporter = nodemailer.createTransport({
     pass: 'iviy lxin kxbb qiwm', // Double-check this
   },
 });
+
+const Stripe = require('stripe');       
+const stripe = Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
+
+app.post('/create-checkout-session', async (req, res) => {
+  try {
+    const { metadata, line_items, success_url, cancel_url } = req.body;
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      metadata,
+      line_items,
+      mode: 'payment',
+      success_url,
+      cancel_url,
+    });
+    res.json({ id: session.id });
+  } catch (err) {
+    console.error('Stripe error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 app.post('/send-email', (req, res) => {
   const { name, phone, email, message } = req.body;

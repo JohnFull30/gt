@@ -1,5 +1,4 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -20,7 +19,7 @@ const Navbar = () => {
         <Typography
           variant="h6"
           component={Link}
-          to="/gt"
+          to="/"
           sx={{ fontWeight: "bold", cursor: "pointer", "&:hover": { color: "#secondary.main" }, textDecoration: 'none', color: 'primary.main' }}
         >
           GoTobago
@@ -57,7 +56,6 @@ const Navbar = () => {
 
         {/* Menu Icon */}
         <IconButton edge="end" color="inherit">
-          <MenuIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
