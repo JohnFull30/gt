@@ -6,12 +6,12 @@ read commit_message
 
 # Switch to main and pull latest from remote
 git checkout main
-git pull origin main
+git pull main
 
 # Stage, commit, and push explicitly to origin main
 git add .
 git commit -m "$commit_message"
-git push origin main
+git push main
 
 # Deploy using npm script (pushes to gh-pages automatically)
 npm run deploy
