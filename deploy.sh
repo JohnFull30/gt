@@ -3,22 +3,23 @@
 # Ask for a commit message
 read -p "Enter your commit message: " commit_message < /dev/tty
 
-# Stash any changes to allow rebase
-git stash
-
-# Switch to main and rebase
+# Ensure you're on main
 git checkout main
-git pull --rebase origin main
 
-# Apply stashed changes
-git stash pop
-
-# Stage, commit, and push to main
+# Stage your changes
 git add .
-git commit -m "$commit_message"
-git push origin main
 
-# Deploy using npm script (pushes to gh-pages automatically)
+# Commit your changes
+git commit -m "$commit_message"
+
+# Try pushing; if it fails due to non-fast-forward, rebase first
+if ! git push origin main; then
+  echo "🔁 Branch has diverged. Attempting to rebase..."
+  git pull --rebase origin main
+  git push origin main
+fi
+
+# Deploy to gh-pages
 npm run deploy
 
-echo "✅ Deployed to gh-pages using npm run deploy!"
+echo "✅ All set! Changes committed and deployed!"
