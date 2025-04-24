@@ -1,6 +1,6 @@
 // src/components/ToursPage.jsx
 import React from 'react';
-import { Container, Grid2, Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
+import { Container, Grid2, Card, CardActionArea, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
 import { Link } from "react-router-dom";
 
 const toursData = [
@@ -40,6 +40,7 @@ export default function ToursPage() {
           {toursData.map((tour, index) => (
             <Grid2 item key={index} xs={12} sm={6} md={4}>
               <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
+              <CardActionArea component={Link} to={`/tours/${tour.id}`}>
                 <CardMedia
                   component="img"
                   height="200"
@@ -63,6 +64,7 @@ export default function ToursPage() {
                     Book Now
                   </Button>
                 </CardContent>
+                </CardActionArea>
               </Card>
             </Grid2>
           ))}
