@@ -1,17 +1,22 @@
 #!/bin/bash
 
 # Ask for a commit message
-echo "Enter your commit message:"
-read commit_message
+read -p "Enter your commit message: " commit_message < /dev/tty
 
-# Switch to main and pull latest from remote
+# Stash any changes to allow rebase
+git stash
+
+# Switch to main and rebase
 git checkout main
-git pull main
+git pull --rebase origin main
 
-# Stage, commit, and push explicitly to origin main
+# Apply stashed changes
+git stash pop
+
+# Stage, commit, and push to main
 git add .
 git commit -m "$commit_message"
-git push main
+git push origin main
 
 # Deploy using npm script (pushes to gh-pages automatically)
 npm run deploy
