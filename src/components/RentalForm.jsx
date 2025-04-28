@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe(
