@@ -1,25 +1,24 @@
 require('dotenv').config();               // 1️⃣ Load .env first
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // 2️⃣ Require Nodemailer
-
+const nodemailer = require('nodemailer');
+const Stripe = require('stripe');         // 2️⃣ Require Stripe
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-
-// Nodemailer setup (ensure correct credentials!)
+// Nodemailer setup using your .env
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'johnathanfuller0@gmail.com',
-    pass: 'iviy lxin kxbb qiwm', // Double-check this
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-const Stripe = require('stripe');       
-const stripe = Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
+// ⚠️ Use the exact name from your .env (STRIPE_SECRET_KEY)
+const stripe = Stripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 app.post('/create-checkout-session', async (req, res) => {
   try {
@@ -39,13 +38,11 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
-
 app.post('/send-email', (req, res) => {
   const { name, phone, email, message } = req.body;
-
   const mailOptions = {
     from: email,
-    to: 'johnathanfuller0@gmail.com',
+    to: process.env.EMAIL_USER,
     subject: 'New Rental Request',
     text: `
       Name: ${name}
@@ -54,19 +51,15 @@ app.post('/send-email', (req, res) => {
       Message: ${message || 'No message provided.'}
     `,
   };
-
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error("Detailed error:", error);
+      console.error('Detailed error:', error);
       return res.status(500).send({ success: false, error: error.message });
     }
-    console.log("Email sent:", info.response);
+    console.log('Email sent:', info.response);
     res.status(200).send({ success: true, info: info.response });
   });
 });
 
-// Explicitly set safe port
 const PORT = 4000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
