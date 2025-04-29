@@ -1,8 +1,9 @@
+// emailServer.js
 require('dotenv').config();               // 1️⃣ Load .env first
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const Stripe = require('stripe');         // 2️⃣ Require Stripe
+const Stripe = require('stripe');
 
 const app = express();
 app.use(express.json());
@@ -17,10 +18,11 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// ⚠️ Use the exact name from your .env (STRIPE_SECRET_KEY)
-const stripe = Stripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+// ⚠️ Use STRIPE_SECRET_KEY (not the React publishable one)
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.post('/create-checkout-session', async (req, res) => {
+  console.log('→ Incoming checkout payload:', req.body);
   try {
     const { metadata, line_items, success_url, cancel_url } = req.body;
     const session = await stripe.checkout.sessions.create({
@@ -31,9 +33,11 @@ app.post('/create-checkout-session', async (req, res) => {
       success_url,
       cancel_url,
     });
+    console.log('✔️ Stripe session created:', session.id);
     res.json({ id: session.id });
   } catch (err) {
-    console.error('Stripe error:', err);
+    console.error('❌ Stripe error:', err.message);
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -45,10 +49,10 @@ app.post('/send-email', (req, res) => {
     to: process.env.EMAIL_USER,
     subject: 'New Rental Request',
     text: `
-      Name: ${name}
-      Phone: ${phone}
-      Email: ${email}
-      Message: ${message || 'No message provided.'}
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Message: ${message || 'No message provided.'}
     `,
   };
   transporter.sendMail(mailOptions, (error, info) => {
