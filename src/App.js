@@ -9,11 +9,13 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import SearchBar from './components/SearchBar';
 import FilterComponent from './components/FilterComponent';
-import ToursPage from './components/ToursPage';
+import ToursPage from './pages/ToursPage';
 import TourDetails from './pages/TourDetails';
 import Rentals from './pages/Rentals';
 import RentalForm from './components/RentalForm';
 import About from './pages/About';
+import SuccessPage from './pages/SuccesfulPage';
+import Cancel from './pages/Cancel';
 
 function App() {
   return (
@@ -75,6 +77,9 @@ function App() {
 
           {/* About Page */}
           <Route path="/about" element={<About />} />
+
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/cancel" element={<Cancel />} />
 
         </Routes>
       </Router>

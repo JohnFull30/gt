@@ -71,8 +71,8 @@ export default function RentalForm() {
             quantity: 1
           }
         ],
-        success_url: `${window.location.origin}/success`,
-        cancel_url: `${window.location.origin}/cancel`
+        success_url: `${window.location.origin}/#/success`,
+        cancel_url: `${window.location.origin}/#/cancel`
       })
     });
     const session = await resp.json();
