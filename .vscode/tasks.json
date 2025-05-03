@@ -4,7 +4,7 @@
       {
         "label": "Deploy to GitHub Pages",
         "type": "shell",
-        "command": "${workspaceFolder}/deploy.sh",
+        "command": "${workspaceFolder}/scripts/deploy.sh",
         "problemMatcher": [],
         "group": {
           "kind": "build",
