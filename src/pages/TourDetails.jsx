@@ -1,84 +1,128 @@
 import React from 'react';
-import { Container, Typography, Box, Divider, Button } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Divider,
+  Button,
+  ImageList,
+  ImageListItem,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '@mui/material';
 import { useParams, Link } from 'react-router-dom';
 
-// TODO: Ask Curvin about adding stings ray viewing, and/or switching one thing for it. Would that cost more becuase it's further
-// TODO: also ask general opinion about this. Does he know of better waterfalls
-
+// Each tour now has an array of images and an itinerary
 const getTourContent = (tourId) => {
-    switch (tourId) {
-        case 'essence': 
-            return {
-                title: "Essence of Tobago",
-                about: [
-                  {
-                    title: "Fort King George",
-                    content: "Enjoy stunning views of Scarborough and the Atlantic Ocean from this well-preserved fort, complete with cannons and a small museum showcasing Tobago’s history."
-                  },
-                  {
-                    title: "Argyle Waterfall",
-                    content: "Take a short walk through lush rainforest to Tobago’s highest waterfall. The multi-tiered cascade is perfect for photo ops and a refreshing dip."
-                  },
-                  {
-                    title: "Tobago Cocoa Estate",
-                    content: "Experience Tobago’s chocolate-making process from bean to bar. Learn about traditional cocoa cultivation and sample locally produced chocolate."
-                  },
-                  {
-                    title: "Speyside Lookout",
-                    content: "Marvel at panoramic views of the Atlantic coast and offshore islands like Little Tobago and Goat Island. A great photo stop."
-                  },
-                  {
-                    title: "Lunch Stop (Optional)",
-                    content: "An optional lunch break at a local restaurant can be arranged upon request (not included in tour price)."
-                  }
-                ]
-            };
-        case 'real':
-            return {
-                about: [
-                    { title: "Visit a farm", content: "TBD along lines of visit local farm where you can get products that will be cooked in meal later?" },
-                    { title: "Have dinner with a real family", content: "TBD along lines of eating at someones home with quality and local ingredients from nearby farms and producers" }
-            ]
-        };
-        default:
-            return null;
-    }
-}
+  switch (tourId) {
+    case 'beach':
+      return {
+        title: 'Tobago Beach Escape',
+        images: [
+          `${process.env.PUBLIC_URL}/assets/tour-beach.jpg`,
+        ],
+        itinerary: [
+          { duration: '30 mins', activity: 'Scenic Coastal Drive', details: 'Wind through hidden coves and coral cliffs—perfect for snaps.' },
+          { duration: '1 hr 30 mins', activity: 'Beach Lounge', details: 'Chill under a palapa on soft sands with reggae in the air.' },
+          { duration: '1 hr', activity: 'Seaside Feast', details: 'Bake & shark tacos, plantain crisps & fresh coconut water.' },
+          { duration: '45 mins', activity: 'Sunset Return', details: 'Cruise back via Argyle Lookout as de sun dips.' },
+        ],
+      };
 
+    case 'glass-boat':
+      return {
+        title: 'Exclusive Glass-Bottom Boat',
+        images: [
+          `${process.env.PUBLIC_URL}/assets/tour-boat.jpg`,
+        ],
+        itinerary: [
+          { duration: '30 mins', activity: 'VIP Boarding', details: 'Private boat tour briefing & cold refreshments ready.' },
+          { duration: '1 hr 30 mins', activity: 'Glass-Bottom Cruise', details: 'Peer through crystal panels at reefs and tropical fish.' },
+          { duration: '1 hr', activity: 'Jet Ski Option', details: 'Optional lagoon ride—helm and safety gear supplied.' },
+          { duration: '45 mins', activity: 'Cove Market Stop', details: 'Dock for fried dumplings & cold coconut punch.' },
+          { duration: '45 mins', activity: 'Chilled Return', details: 'Sip cocktails on deck as you glide home.' },
+        ],
+      };
+
+    case 'waterfall-stingray':
+      return {
+        title: 'Waterfall & Stingray Safari',
+        images: [
+          `${process.env.PUBLIC_URL}/assets/tour-waterfall.jpg`,
+        ],
+        itinerary: [
+          { duration: '45 mins', activity: 'Jungle Trek', details: 'Guided hike through rainforest to Argyle Falls.' },
+          { duration: '45 mins', activity: 'Waterfall Swim', details: 'Dip in de cool pool beneath the cascade.' },
+          { duration: '1 hr', activity: 'Picnic by the Falls', details: 'Roti, chutneys & fresh fruit served riverside.' },
+          { duration: '45 mins', activity: 'Stingray Feeding', details: 'Hand-feed friendly stingrays in crystal shallows.' },
+          { duration: '1 hr', activity: 'Pier Fishing & Return', details: 'Cast a line off the pier, then roll back sharing stories.' },
+        ],
+      };
+
+    default:
+      return null;
+  }
+};
 
 const TourDetails = () => {
-    const { id } = useParams();
-    const tour = getTourContent(id);
+  const { id } = useParams();
+  const tour = getTourContent(id);
+  if (!tour) return null;
+
+  const { title, images, itinerary } = tour;
 
   return (
     <Container maxWidth="md" sx={{ py: 8 }}>
+      {/* Photo Gallery */}
+      <ImageList cols={Math.min(images.length, 3)} rowHeight={300} sx={{ mb: 6, borderRadius: 2 }}>        
+        {images.map((src, idx) => (
+          <ImageListItem key={idx} sx={{ overflow: 'hidden' }}>
+            <img src={src} alt={`${title} ${idx + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </ImageListItem>
+        ))}
+      </ImageList>
+
       <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ float: 'inline-end', mt: 2 }}>
         Book Now
-        </Button>
-      <Typography variant="h3" fontWeight="bold" gutterBottom>
-        {tour.title}
-      </Typography>
+      </Button>
 
+      <Typography variant="h3" fontWeight="bold" gutterBottom>
+        {title}
+      </Typography>
 
       <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 6 }}>
-      A curated half-day experience that captures the heart and beauty of Tobago
-      <div>$90</div>
+        A curated half-day experience that captures the heart and beauty of Tobago
+        <div>$90</div>
       </Typography>
 
+      {/* Itinerary Table */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" fontWeight="bold" gutterBottom>
+          Itinerary
+        </Typography>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell><strong>Duration</strong></TableCell>
+              <TableCell><strong>Activity</strong></TableCell>
+              <TableCell><strong>Details</strong></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itinerary.map((item, idx) => (
+              <TableRow key={idx}>
+                <TableCell>{item.duration}</TableCell>
+                <TableCell>{item.activity}</TableCell>
+                <TableCell>{item.details}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
 
-      {tour.about.map((section, index) => (
-        <Box key={index} sx={{ mb: 5 }}>
-          <Typography variant="h5" fontWeight="bold" gutterBottom>
-            {section.title}
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
-            {section.content}
-          </Typography>
-          {index < tour.about.length - 1 && (
-            <Divider sx={{ my: 4 }} />
-          )}
-        </Box>
-      ))}
     </Container>
   );
 };
