@@ -9,13 +9,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// sanity‐check
+// sanity-check endpoint
 app.get('/', (_req, res) => res.send('✅ EmailServer up'));
 
 // Stripe setup
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-// 1️⃣ Checkout‐session endpoint
+// 1️⃣ Checkout-session endpoint
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { line_items, metadata, success_url, cancel_url } = req.body;
@@ -25,7 +25,7 @@ app.post('/create-checkout-session', async (req, res) => {
       mode: 'payment',
       metadata,
       success_url: success_url || `${process.env.CLIENT_URL}/#/success`,
-      cancel_url:  cancel_url  || `${process.env.CLIENT_URL}/#/rentalForm`,
+      cancel_url: cancel_url || `${process.env.CLIENT_URL}/#/rentalForm`,
     });
     return res.json({ id: session.id });
   } catch (err) {
@@ -37,9 +37,15 @@ app.post('/create-checkout-session', async (req, res) => {
 // 2️⃣ Email handler
 app.post('/send-email', async (req, res) => {
   const {
-    name, email, phone,
-    tourId, tourName,
-    date, timeOfDay, message
+    name,
+    email,
+    phone,
+    tourId,
+    tourName,
+    date,
+    timeOfDay,
+    guests,
+    message
   } = req.body;
 
   const transporter = nodemailer.createTransport({
@@ -53,7 +59,7 @@ app.post('/send-email', async (req, res) => {
   // Admin notification
   const adminMail = {
     from: process.env.EMAIL_USER,
-    to:   process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
+    to: process.env.ADMIN_EMAIL || process.env.EMAIL_USER,
     subject: `🚨 [Admin] New Booking: ${tourName}`,
     html: `
       <h2>New Tour Booking</h2>
@@ -63,6 +69,7 @@ app.post('/send-email', async (req, res) => {
         <li><strong>Email:</strong> ${email}</li>
         <li><strong>Phone:</strong> ${phone}</li>
         <li><strong>Date:</strong> ${date} (${timeOfDay})</li>
+        <li><strong>Guests:</strong> ${guests}</li>
         <li><strong>Message:</strong> ${message || '—'}</li>
       </ul>
     `,
@@ -71,13 +78,14 @@ app.post('/send-email', async (req, res) => {
   // Customer confirmation
   const customerMail = {
     from: process.env.EMAIL_USER,
-    to:   email,
+    to: email,
     subject: `🎉 Your ${tourName} Booking is Confirmed!`,
     html: `
       <div>
         <h1>Thanks for booking with GoTobago!</h1>
         <p>Hi ${name},</p>
-        <p>Your tour <strong>${tourName}</strong> (ID: ${tourId}) is all set for <strong>${date}</strong> (${timeOfDay}).</p>
+        <p>Your tour <strong>${tourName}</strong> is all set for <strong>${date}</strong> (${timeOfDay}).</p>
+        <p><strong>Number of Guests:</strong> ${guests}</p>
         <p><strong>Meeting point:</strong> [Your meeting location]</p>
         <p><strong>What to bring:</strong> Water, sunscreen, comfy shoes</p>
         <p>If you have any questions or need to modify your booking, just reply or call us at (868) 555-5555.</p>

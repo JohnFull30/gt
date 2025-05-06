@@ -9,8 +9,10 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 export default function RentalForm() {
   // grab tour data from Link state
-  const { state } = useLocation();
-  const { tourId = '', tourName = '' } = state || {};
+  const loc = useLocation();
+const params = new URLSearchParams(loc.search);
+const tourId   = loc.state?.tourId   || params.get('tourId')   || '';
+const tourName = loc.state?.tourName || params.get('tourName') || '';
 
   const [formData, setFormData] = useState({
     name: '',
@@ -102,7 +104,7 @@ export default function RentalForm() {
 
       {tourName && (
         <Typography variant="subtitle1" sx={{ mb: 2 }}>
-          Booking: <strong>{tourName}</strong> (ID: {tourId})
+          Booking: <strong>{tourName}</strong> 
         </Typography>
       )}
 

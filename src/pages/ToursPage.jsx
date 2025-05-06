@@ -1,9 +1,19 @@
 // src/components/ToursPage.jsx
-import React from 'react';
-import { Container, Grid2, Card, CardActionArea, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
-import { Link } from "react-router-dom";
 
-// src/components/ToursPage.jsx
+import React from 'react';
+import {
+  Container,
+  Grid2,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Box
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+
 const toursData = [
   {
     id: 'beach',
@@ -28,9 +38,8 @@ const toursData = [
   },
 ];
 
-
 export default function ToursPage() {
-  console.log("ToursPage Component Rendered"); // Debugging step
+  console.log("ToursPage Component Rendered");
 
   return (
     <Container sx={{ py: 5 }}>
@@ -38,39 +47,63 @@ export default function ToursPage() {
         <Typography variant="h4" gutterBottom>
           Tours and Experiences
         </Typography>
+
         <Grid2 container spacing={4} justifyContent="center">
-          {toursData.map((tour, index) => (
-            <Grid2 item key={index} xs={12} sm={6} md={4}>
-              <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
-              <CardActionArea component={Link} to={`/tours/${tour.id}`}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={tour.image}
-                  alt={tour.title}
-                  sx={{ objectFit: "cover" }} // Ensures the image fills the thumbnail while maintaining aspect ratio
-                />
-                <CardContent sx={{ textAlign: "center" }}>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {tour.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ textAlign: "left" }}>
-                    {tour.description}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ mt: 1 }}>
-                    {tour.price}
-                  </Typography>
-                  <Button variant="contained" component={Link} to={`/tours/${tour.id}`} color="secondary" sx={{ m: 2 }}>
-                    View Details
-                  </Button>
-                  <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ m: 2 }}>
-                    Book Now
-                  </Button>
-                </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid2>
-          ))}
+          {toursData.map((tour) => {
+            const encodedName = encodeURIComponent(tour.title);
+            return (
+              <Grid2 item key={tour.id} xs={12} sm={6} md={4}>
+                <Card sx={{ maxWidth: 345, boxShadow: 3 }}>
+                  <CardActionArea component={Link} to={`/tours/${tour.id}`}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={tour.image}
+                      alt={tour.title}
+                      sx={{ objectFit: "cover" }}
+                    />
+                    <CardContent sx={{ textAlign: "center" }}>
+                      <Typography gutterBottom variant="h6">
+                        {tour.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ textAlign: "left" }}
+                      >
+                        {tour.description}
+                      </Typography>
+                      <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                        {tour.price}
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        component={Link}
+                        to={`/tours/${tour.id}`}
+                        color="secondary"
+                        sx={{ m: 2 }}
+                      >
+                        View Details
+                      </Button>
+                      <Button
+                        variant="contained"
+                        component={Link}
+                        to={{
+                          pathname: '/rentalForm',
+                          search: `?tourId=${tour.id}&tourName=${encodedName}`,
+                          state: { tourId: tour.id, tourName: tour.title }
+                        }}
+                        color="primary"
+                        sx={{ m: 2 }}
+                      >
+                        Book Now
+                      </Button>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid2>
+            );
+          })}
         </Grid2>
       </Box>
     </Container>
