@@ -1,9 +1,10 @@
+// src/pages/TourDetails.jsx
+
 import React from 'react';
 import {
   Container,
   Typography,
   Box,
-  Divider,
   Button,
   ImageList,
   ImageListItem,
@@ -21,9 +22,8 @@ const getTourContent = (tourId) => {
     case 'beach':
       return {
         title: 'Tobago Beach Escape',
-        images: [
-          `${process.env.PUBLIC_URL}/assets/tour-beach.jpg`,
-        ],
+        images: [`${process.env.PUBLIC_URL}/assets/tour-beach.jpg`],
+        price: 90,
         itinerary: [
           { duration: '30 mins', activity: 'Scenic Coastal Drive', details: 'Wind through hidden coves and coral cliffs—perfect for snaps.' },
           { duration: '1 hr 30 mins', activity: 'Beach Lounge', details: 'Chill under a palapa on soft sands with reggae in the air.' },
@@ -35,9 +35,8 @@ const getTourContent = (tourId) => {
     case 'glass-boat':
       return {
         title: 'Exclusive Glass-Bottom Boat',
-        images: [
-          `${process.env.PUBLIC_URL}/assets/tour-boat.jpg`,
-        ],
+        images: [`${process.env.PUBLIC_URL}/assets/tour-boat.jpg`],
+        price: 120,
         itinerary: [
           { duration: '30 mins', activity: 'VIP Boarding', details: 'Private boat tour briefing & cold refreshments ready.' },
           { duration: '1 hr 30 mins', activity: 'Glass-Bottom Cruise', details: 'Peer through crystal panels at reefs and tropical fish.' },
@@ -50,9 +49,8 @@ const getTourContent = (tourId) => {
     case 'waterfall-stingray':
       return {
         title: 'Waterfall & Stingray Safari',
-        images: [
-          `${process.env.PUBLIC_URL}/assets/tour-waterfall.jpg`,
-        ],
+        images: [`${process.env.PUBLIC_URL}/assets/tour-waterfall.jpg`],
+        price: 110,
         itinerary: [
           { duration: '45 mins', activity: 'Jungle Trek', details: 'Guided hike through rainforest to Argyle Falls.' },
           { duration: '45 mins', activity: 'Waterfall Swim', details: 'Dip in de cool pool beneath the cascade.' },
@@ -72,30 +70,54 @@ const TourDetails = () => {
   const tour = getTourContent(id);
   if (!tour) return null;
 
-  const { title, images, itinerary } = tour;
+  const { title, images, price, itinerary } = tour;
+  const encodedName = encodeURIComponent(title);
 
   return (
     <Container maxWidth="md" sx={{ py: 8 }}>
+
       {/* Photo Gallery */}
-      <ImageList cols={Math.min(images.length, 3)} rowHeight={300} sx={{ mb: 6, borderRadius: 2 }}>        
+      <ImageList
+        cols={Math.min(images.length, 3)}
+        rowHeight={300}
+        sx={{ mb: 6, borderRadius: 2 }}
+      >
         {images.map((src, idx) => (
           <ImageListItem key={idx} sx={{ overflow: 'hidden' }}>
-            <img src={src} alt={`${title} ${idx + 1}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img
+              src={src}
+              alt={`${title} ${idx + 1}`}
+              loading="lazy"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
           </ImageListItem>
         ))}
       </ImageList>
 
-      <Button variant="contained" component={Link} to="/rentalForm" color="primary" sx={{ float: 'inline-end', mt: 2 }}>
+      {/* Book Now button with both state & query params */}
+      <Button
+        variant="contained"
+        color="primary"
+        component={Link}
+        to={{
+          pathname: '/rentalForm',
+          search: `?tourId=${id}&tourName=${encodedName}`,
+          state: { tourId: id, tourName: title },
+        }}
+        sx={{ float: 'right', mt: 2 }}
+      >
         Book Now
       </Button>
 
-      <Typography variant="h3" fontWeight="bold" gutterBottom>
+      {/* Title & Price */}
+      <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ mt: 4 }}>
         {title}
       </Typography>
-
       <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 6 }}>
         A curated half-day experience that captures the heart and beauty of Tobago
-        <div>$90</div>
+        <Box component="span" sx={{ display: 'block', fontSize: '1.5rem', fontWeight: 'bold', mt: 1 }}>
+          ${price}
+        </Box>
       </Typography>
 
       {/* Itinerary Table */}

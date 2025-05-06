@@ -78,8 +78,8 @@ function App() {
           {/* About Page */}
           <Route path="/about" element={<About />} />
 
-          <Route path="/success" element={<SuccessPage />} />
-          <Route path="/cancel" element={<Cancel />} />
+          <Route path="/#/success" element={<SuccessPage />} />
+          <Route path="/#/cancel" element={<Cancel />} />
 
         </Routes>
       </Router>
